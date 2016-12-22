@@ -1,20 +1,147 @@
--#  This file is app/views/movies/index.html.haml
-%h1 All Movies
-%table#movies
-  %thead
-    %tr
-      %th Movie number
-      %th Movie Title
-      %th Rating
-      %th Release Date
-      %th More Info
-  %tbody
-  -@movies.each_with_index do |movie, i|
-    %tr
-      %td=i+1
-      %td= movie.title
-      %td= movie.rating
-      %td= movie.release_date
-      %td= link_to "More about #{movie.title}", movie_path(movie)
-    
-= link_to 'Add new movie.niraz', new_movie_path
+!!!
+%html{:xmlns => "http://www.w3.org/1999/xhtml"}
+  %head
+    %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
+    %title Ride Me!!
+    %link{:href => "http://cdn.syncfusion.com/13.2.0.29/js/web/flat-azure/ej.web.all.min.css", :rel => "stylesheet"}/
+    %script{:src => "https://code.jquery.com/jquery-1.10.2.min.js"}
+    %script{:src => "http://cdn.syncfusion.com/js/assets/external/jquery.easing.1.3.min.js"} :cdata
+    %script{:src => "http://cdn.syncfusion.com/js/assets/external/jquery.globalize.min.js"}
+    %script{:src => "http://cdn.syncfusion.com/js/assets/external/jsrender.min.js"}
+    %script{:src => "http://cdn.syncfusion.com/13.2.0.29/js/web/ej.web.all.min.js"} :cdata
+    %link{:href => "http://www.w3schools.com/lib/w3.css", :rel => "stylesheet"}/
+    %link{:href => "app/assets/stylesheets/mycss.css", :rel => "stylesheet"}/
+  %body
+  
+  .divTable
+  .divTableBody
+    .divTableRow
+      .divTableCell  
+      .divTableCell  
+      .divTableCell  
+    .divTableRow
+      .divTableCell  
+      .divTableCell  
+      .divTableCell  
+  
+    .login_top_menu
+      %img{:height => "140", :src => "/myrottenpotatoes/app/views/movies/Images/car2.jpg", :width => "440"}/
+      
+      %div{:style => "float : right"}
+        %br/
+        %label Username
+        %input{:type => "text"}/
+        %label Password
+        %input{:type => "password"}/
+        %input{:type => "button", :value => "login"}/
+        %p
+          %a{:href => "#"} forget Username or password ?
+    %br/
+    .login_create_new_img
+      %img{:src => "Scc%20Image/car2.jpg", :width => "300%"}/
+    .login_create_new
+      %center
+        %h1 Sign In
+        %div
+          %label First Name
+          %input{:type => "text"}/
+          %label Middle Initial
+          %input{:maxlength => "2", :size => "2", :type => "text"}/
+          %label Last Name
+          %input{:type => "text"}/
+        %br/
+        %div
+          %label Email Address
+          %input{:size => "85", :type => "email"}/
+        %br/
+        %div
+          %label Phone Number
+          %input{:type => "text"}/
+          %label Address :
+          %input{:size => "50", :type => "text"}/
+        %br/
+        %div
+          %label City
+          %input{:size => "22", :type => "text"}/
+          %label State
+          %input{:maxlength => "2", :size => "2", :type => "text"}/
+          %label Zip Code
+          %input{:size => "20", :type => "text"}/
+        %br/
+        %div
+          %label Create Password
+          %input{:size => "31", :type => "password"}/
+          %label Retype Password
+          %input{:size => "33", :type => "password"}/
+        %br/
+        %div
+          %label Date of Birth
+          %input#datePicker{:size => "85"}/
+          %br/
+          %label Are You a car Owner ?
+          %select#carOwnerSelect{:onchange => "carOwner()"}
+            %option{:value => "Y"} Yes
+            %option{:selected => "selected", :value => "N"} No
+        %br/
+        #not_A_car_owner
+          %button{:style => "width : 25% ; background-color : green;"} Submit
+          %button{:style => "width : 25% ; background-color : red;"} Cancel
+        %br/
+        #Car_owner
+          %div
+            %label Car Model
+            %input{:type => "text"}/
+            %label Car Type
+            %select
+              %option Sedan
+              %option Suv
+              %option Subcompact
+              %option Compact
+              %option Mid-size
+              %option Full-size
+            %label Car Year
+            %input{:maxlength => "4", :size => "4", :type => "text"}/
+          %br/
+          %div
+            %label Car Vin Number
+            %input{:type => "text"}/
+            %label Car plate number
+            %input{:type => "text"}/
+          %br/
+          %div
+            %label Driver Licence Number
+            %input{:size => "50", :type => "text"}/
+          %br/
+          %div
+            %button{:style => "width : 25% ; background-color : green;"} Submit
+            %button{:style => "width : 25% ; background-color : red;"} Cancel
+    :javascript
+      $("#datePicker").ejDatePicker();
+      $('#Car_owner').hide();
+      //var slideIndex = 1;
+      //showDivs(slideIndex);
+
+      //function plusDivs(n) {
+      //    showDivs(slideIndex += n);
+      //}
+
+      //function showDivs(n) {
+      //    var i;
+      //    var x = document.getElementsByClassName("mySlides");
+      //    if (n > x.length) { slideIndex = 1 }
+      //    if (n < 1) { slideIndex = x.length }
+      //    for (i = 0; i < x.length; i++) {
+      //        x[i].style.display = "none";
+      //    }
+      //    x[slideIndex - 1].style.display = "block";
+      //}
+      function carOwner() {
+          alert($('#carOwnerSelect').val());
+          if ($('#carOwnerSelect').val() == "Y") {
+              $('#not_A_car_owner').hide();
+              $('#Car_owner').show();
+          } else {
+              $('#not_A_car_owner').show();
+              $('#Car_owner').hide();
+          }
+      }
